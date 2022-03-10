@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03ACF12427D82C79000F65BC /* GroceryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACF12327D82C79000F65BC /* GroceryListItem.swift */; };
+		03ACF12627DA3FF6000F65BC /* SectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACF12527DA3FF6000F65BC /* SectionView.swift */; };
 		1DEB575927D6F2000055260F /* GroceryListSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEB575827D6F2000055260F /* GroceryListSwiftUIApp.swift */; };
 		1DEB575B27D6F2000055260F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEB575A27D6F2000055260F /* ContentView.swift */; };
 		1DEB575D27D6F2030055260F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DEB575C27D6F2030055260F /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		03ACF12327D82C79000F65BC /* GroceryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListItem.swift; sourceTree = "<group>"; };
+		03ACF12527DA3FF6000F65BC /* SectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionView.swift; sourceTree = "<group>"; };
 		1DEB575527D6F2000055260F /* GroceryListSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroceryListSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DEB575827D6F2000055260F /* GroceryListSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListSwiftUIApp.swift; sourceTree = "<group>"; };
 		1DEB575A27D6F2000055260F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -77,6 +79,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		031997A627DAA08C0070A105 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				03ACF12327D82C79000F65BC /* GroceryListItem.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		1DEB574C27D6F2000055260F = {
 			isa = PBXGroup;
 			children = (
@@ -100,13 +110,14 @@
 		1DEB575727D6F2000055260F /* GroceryListSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				031997A627DAA08C0070A105 /* CoreData */,
 				1DEB575827D6F2000055260F /* GroceryListSwiftUIApp.swift */,
 				1DEB575A27D6F2000055260F /* ContentView.swift */,
+				03ACF12527DA3FF6000F65BC /* SectionView.swift */,
 				1DEB575C27D6F2030055260F /* Assets.xcassets */,
 				1DEB576127D6F2030055260F /* Persistence.swift */,
 				1DEB576327D6F2030055260F /* GroceryListSwiftUI.xcdatamodeld */,
 				1DEB575E27D6F2030055260F /* Preview Content */,
-				03ACF12327D82C79000F65BC /* GroceryListItem.swift */,
 			);
 			path = GroceryListSwiftUI;
 			sourceTree = "<group>";
@@ -268,6 +279,7 @@
 			files = (
 				03ACF12427D82C79000F65BC /* GroceryListItem.swift in Sources */,
 				1DEB576227D6F2030055260F /* Persistence.swift in Sources */,
+				03ACF12627DA3FF6000F65BC /* SectionView.swift in Sources */,
 				1DEB576527D6F2030055260F /* GroceryListSwiftUI.xcdatamodeld in Sources */,
 				1DEB575B27D6F2000055260F /* ContentView.swift in Sources */,
 				1DEB575927D6F2000055260F /* GroceryListSwiftUIApp.swift in Sources */,

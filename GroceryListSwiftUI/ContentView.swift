@@ -41,7 +41,7 @@ struct ContentView: View {
                                 }
                                 
                                 // Reseting to empty textfield when app is closed
-                                text = ""
+//                                text = ""
                                 
                             }
                             
@@ -56,17 +56,28 @@ struct ContentView: View {
                 
                 Section {
                     ForEach(items) { groceryListItem in
-                        VStack(alignment: .leading) {
-                            
-                            Button(action: {
-                                print("Debug: clicked")
-                            }, label: {
-                                Text(groceryListItem.name!)
-                                    .font(.headline)
-//                                Text("\(groceryListItem.createdAt!)")
-                            })
-
+                        
+                        NavigationLink(destination: SectionView(groceryListItem: groceryListItem)) {
+                            Text(groceryListItem.name!).font(.headline)
                         }
+                        
+                        
+                        
+//                        VStack(alignment: .leading) {
+//
+//                            Button(action: {
+//                                print("Debug: clicked")
+//                            }, label: {
+//                                Text(groceryListItem.name!)
+//                                    .font(.headline)
+////                                Text("\(groceryListItem.createdAt!)")
+//                            })
+//
+//                        }
+                        
+                        
+                        
+                        
                     }
                     .onDelete(perform: { indexSet in
                         guard let index = indexSet.first else {
