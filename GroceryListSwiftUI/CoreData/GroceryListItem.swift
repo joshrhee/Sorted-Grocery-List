@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 class GroceryListItem: NSManagedObject, Identifiable {
-    @NSManaged var name: String?
+    @NSManaged var groceryName: String?
     @NSManaged var createdAt: Date?
 }
 
@@ -18,7 +18,7 @@ extension GroceryListItem {
         let request: NSFetchRequest<GroceryListItem> =
         GroceryListItem.fetchRequest() as! NSFetchRequest<GroceryListItem>
         
-        let sort = NSSortDescriptor(key: "name", ascending: true)
+        let sort = NSSortDescriptor(key: "groceryName", ascending: true)
         request.sortDescriptors = [sort]
         
         return request

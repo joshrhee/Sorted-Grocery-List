@@ -31,7 +31,7 @@ struct ContentView: View {
                             
                             if !text.isEmpty {
                                 let newItem = GroceryListItem(context: context)
-                                newItem.name = text
+                                newItem.groceryName = text
                                 newItem.createdAt = Date()
                                 
                                 do {
@@ -40,8 +40,8 @@ struct ContentView: View {
                                     print("Debug: Button action error is ", error)
                                 }
                                 
-                                // Reseting to empty textfield when app is closed
-//                                text = ""
+                                // Reseting to empty textfield when save button is clicked
+                                text = ""
                                 
                             }
                             
@@ -59,8 +59,8 @@ struct ContentView: View {
                         VStack(alignment: .leading) {
                             NavigationLink(destination: SectionView(groceryListItem: groceryListItem)) {
                                 
-                                if groceryListItem.name != nil {
-                                    Text(groceryListItem.name!).font(.headline)
+                                if groceryListItem.groceryName != nil {
+                                    Text(groceryListItem.groceryName!).font(.headline)
                                 }
                                 
                             }
