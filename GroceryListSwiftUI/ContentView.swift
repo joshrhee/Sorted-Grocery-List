@@ -56,28 +56,15 @@ struct ContentView: View {
                 
                 Section {
                     ForEach(items) { groceryListItem in
-                        
-                        NavigationLink(destination: SectionView(groceryListItem: groceryListItem)) {
-                            Text(groceryListItem.name!).font(.headline)
+                        VStack(alignment: .leading) {
+                            NavigationLink(destination: SectionView(groceryListItem: groceryListItem)) {
+                                
+                                if groceryListItem.name != nil {
+                                    Text(groceryListItem.name!).font(.headline)
+                                }
+                                
+                            }
                         }
-                        
-                        
-                        
-//                        VStack(alignment: .leading) {
-//
-//                            Button(action: {
-//                                print("Debug: clicked")
-//                            }, label: {
-//                                Text(groceryListItem.name!)
-//                                    .font(.headline)
-////                                Text("\(groceryListItem.createdAt!)")
-//                            })
-//
-//                        }
-                        
-                        
-                        
-                        
                     }
                     .onDelete(perform: { indexSet in
                         guard let index = indexSet.first else {
