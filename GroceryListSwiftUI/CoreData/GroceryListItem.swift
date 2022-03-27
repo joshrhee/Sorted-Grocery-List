@@ -11,14 +11,25 @@ import CoreData
 class GroceryListItem: NSManagedObject, Identifiable {
     @NSManaged var groceryName: String?
     @NSManaged var createdAt: Date?
+    @NSManaged var sectionName: String?
 }
 
 extension GroceryListItem {
-    static func getAllToDoListItems() -> NSFetchRequest<GroceryListItem> {
+    static func getAllGroceryNames() -> NSFetchRequest<GroceryListItem> {
         let request: NSFetchRequest<GroceryListItem> =
         GroceryListItem.fetchRequest() as! NSFetchRequest<GroceryListItem>
         
         let sort = NSSortDescriptor(key: "groceryName", ascending: true)
+        request.sortDescriptors = [sort]
+        
+        return request
+    }
+    
+    static func getAllSectionNames() -> NSFetchRequest<GroceryListItem> {
+        let request: NSFetchRequest<GroceryListItem> =
+        GroceryListItem.fetchRequest() as! NSFetchRequest<GroceryListItem>
+        
+        let sort = NSSortDescriptor(key: "sectionName", ascending: true)
         request.sortDescriptors = [sort]
         
         return request

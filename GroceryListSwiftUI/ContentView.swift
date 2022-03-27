@@ -12,7 +12,7 @@ struct ContentView: View {
     
     @Environment(\.managedObjectContext) var context
     
-    @FetchRequest(fetchRequest: GroceryListItem.getAllToDoListItems())
+    @FetchRequest(fetchRequest: GroceryListItem.getAllGroceryNames())
     var items: FetchedResults<GroceryListItem>
     
     @State var text: String = ""
