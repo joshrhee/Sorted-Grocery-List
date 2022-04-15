@@ -44,7 +44,6 @@ struct SectionView: View {
                     }
                 }
                 
-                
                 // Mark: - section name list
                 
                 Section {
@@ -59,6 +58,7 @@ struct SectionView: View {
                             return
                         }
                         let itemToDelete = sections[index]
+
                         context.delete(itemToDelete)
                         
                         do {

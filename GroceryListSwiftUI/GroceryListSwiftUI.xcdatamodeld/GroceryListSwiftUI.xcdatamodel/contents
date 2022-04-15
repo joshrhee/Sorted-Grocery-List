@@ -3,6 +3,7 @@
     <entity name="GroceryListItem" representedClassName=".GroceryListItem" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="groceryName" optional="YES" attributeType="String"/>
+        <attribute name="sectionName" optional="YES" attributeType="String"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="SectionListItem" representedClassName=".SectionListItem" syncable="YES">
