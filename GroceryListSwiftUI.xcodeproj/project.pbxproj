@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		03ACF12427D82C79000F65BC /* GroceryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACF12327D82C79000F65BC /* GroceryListItem.swift */; };
 		03ACF12627DA3FF6000F65BC /* SectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACF12527DA3FF6000F65BC /* SectionView.swift */; };
+		1D32D42428090D4800F651C3 /* SectionListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D32D42328090D4800F651C3 /* SectionListItem.swift */; };
 		1DEB575927D6F2000055260F /* GroceryListSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEB575827D6F2000055260F /* GroceryListSwiftUIApp.swift */; };
 		1DEB575B27D6F2000055260F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEB575A27D6F2000055260F /* ContentView.swift */; };
 		1DEB575D27D6F2030055260F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DEB575C27D6F2030055260F /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		03ACF12327D82C79000F65BC /* GroceryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListItem.swift; sourceTree = "<group>"; };
 		03ACF12527DA3FF6000F65BC /* SectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionView.swift; sourceTree = "<group>"; };
+		1D32D42328090D4800F651C3 /* SectionListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionListItem.swift; sourceTree = "<group>"; };
 		1DEB575527D6F2000055260F /* GroceryListSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroceryListSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DEB575827D6F2000055260F /* GroceryListSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListSwiftUIApp.swift; sourceTree = "<group>"; };
 		1DEB575A27D6F2000055260F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				03ACF12327D82C79000F65BC /* GroceryListItem.swift */,
+				1D32D42328090D4800F651C3 /* SectionListItem.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D32D42428090D4800F651C3 /* SectionListItem.swift in Sources */,
 				03ACF12427D82C79000F65BC /* GroceryListItem.swift in Sources */,
 				1DEB576227D6F2030055260F /* Persistence.swift in Sources */,
 				03ACF12627DA3FF6000F65BC /* SectionView.swift in Sources */,

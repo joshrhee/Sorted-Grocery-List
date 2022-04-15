@@ -57,7 +57,7 @@ struct ContentView: View {
                 Section {
                     ForEach(items) { groceryListItem in
                         VStack(alignment: .leading) {
-                            NavigationLink(destination: SectionView(groceryListItem: groceryListItem)) {
+                            NavigationLink(destination: SectionView()) {
                                 
                                 if groceryListItem.groceryName != nil {
                                     Text(groceryListItem.groceryName!).font(.headline)
