@@ -54,4 +54,17 @@ struct PersistenceController {
             }
         })
     }
+    
+    // Better save
+    func saveContext() {
+        let context = container.viewContext
+
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                fatalError("Error: \(error.localizedDescription)")
+            }
+        }
+    }
 }

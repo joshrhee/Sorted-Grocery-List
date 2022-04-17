@@ -18,6 +18,10 @@ extension SectionListItem {
 
     @NSManaged public var sectionName: String?
     @NSManaged public var groceryListItem: GroceryListItem?
+    
+    public var unwrappedName: String {
+        sectionName ?? "Unknown name"
+    }
 
 }
 

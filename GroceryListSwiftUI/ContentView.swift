@@ -10,92 +10,144 @@ import CoreData
 
 struct ContentView: View {
     
-    @Environment(\.managedObjectContext) private var context
+    @Environment(\.managedObjectContext) private var viewContext
     
     @State var groceryName: String = ""
     
-    @FetchRequest(fetchRequest: GroceryListItem.getAllGroceryNames())
-//    @FetchRequest(
-//            sortDescriptors: [NSSortDescriptor(keyPath: \GroceryListItem.groceryName, ascending: true)],
-//            animation: .default)
+//    @FetchRequest(fetchRequest: GroceryListItem.getAllGroceryNames())
+    @FetchRequest(
+            sortDescriptors: [NSSortDescriptor(keyPath: \GroceryListItem.groceryName, ascending: true)],
+            animation: .default)
     private var groceries: FetchedResults<GroceryListItem>
     
     
+    // Company == GroceryListItem
     var body: some View {
         NavigationView {
-            List {
-
-                // Mark: - Grocery name input textfield
-                
-                Section(header: Text("Grocery Name")) {
-                    HStack {
-                        TextField("Enter grocery name...", text: $groceryName)
-                        
-                        Button(action: {
-                            
-                            if !groceryName.isEmpty {
-                                let newItem = GroceryListItem(context: context)
-                                newItem.groceryName = groceryName
-                                newItem.createdAt = Date()
-                                
-                                do {
-                                    try context.save()
-                                } catch {
-                                    print("Debug: Button action error is ", error)
-                                }
-                                
-                                // Reseting to empty textfield when save button is clicked
-                                groceryName = ""
-                                
-                            }
-                            
-                        }, label: {
-                            Text("Save")
-                        })
+            VStack {
+                HStack {
+                    TextField("Grocery Store name", text: $groceryName)
+                        .textFieldStyle(.roundedBorder)
+                    Button(action: addGrocery) {
+                        Label("", systemImage: "plus")
                     }
+                }.padding()
+                
+                List {
+                    ForEach(groceries) { grocery in
+                        NavigationLink(destination: SectionView(grocery: grocery)) {
+                            Text(grocery.groceryName ?? "")
+                        }
+                    }.onDelete(perform: deleteGrocery)
                 }
-                
-                
-                // MARK: - Grocery name list
-                
-                Section {
-                    ForEach(groceries) { groceryListItem in
-                        VStack(alignment: .leading) {
-                            NavigationLink(destination: SectionView()) {
-                                
-                                if groceryListItem.groceryName != nil {
-                                    Text(groceryListItem.groceryName!).font(.headline)
-                                }
-                                
-                            }
-                        }
-                    }
-                    .onDelete(perform: { indexSet in
-                        guard let index = indexSet.first else {
-                            return
-                        }
-                        let itemToDelete = groceries[index]
-                        context.delete(itemToDelete)
-                        
-                        do {
-                            try context.save()
-                        } catch {
-                            print("Debug: .onDelete error is: ", error)
-                        }
-                    })
-                }
-            }
-            .navigationTitle("Grocery List")
+            }.navigationTitle("Groceries")
         }
     }
     
-    private func deleteCompany(offsets: IndexSet) {
+    private func addGrocery() {
         withAnimation {
-            offsets.map { groceries[$0]
-                }.forEach(context.delete)
-//            PersistenceController.shared.saveContext()
+            let newGrocery = GroceryListItem(context: viewContext)
+            newGrocery.groceryName = groceryName
+            PersistenceController.shared.saveContext()
         }
     }
+    
+    private func deleteGrocery(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { groceries[$0] }.forEach(viewContext.delete)
+            PersistenceController.shared.saveContext()
+            
+        }
+    }
+    
+    
+    
+    
+    
+// MARK: - IOS Academy
+//    var body: some View {
+//        NavigationView {
+//            List {
+//
+//                // Mark: - Grocery name input textfield
+//
+//                Section(header: Text("Grocery Name")) {
+//                    HStack {
+//                        TextField("Enter grocery name...", text: $groceryName)
+//
+//                        Button(action: {
+//
+//                            if !groceryName.isEmpty {
+//                                let newItem = GroceryListItem(context: context)
+//                                newItem.groceryName = groceryName
+//                                newItem.createdAt = Date()
+//
+//                                do {
+//                                    try context.save()
+//                                } catch {
+//                                    print("Debug: Button action error is ", error)
+//                                }
+//
+//                                // Reseting to empty textfield when save button is clicked
+//                                groceryName = ""
+//
+//                            }
+//
+//                        }, label: {
+//                            Text("Save")
+//                        })
+//                    }
+//                }
+//
+//
+//                // MARK: - Grocery name list
+//
+//                Section {
+//                    ForEach(groceries) { groceryListItem in
+//                        VStack(alignment: .leading) {
+//                            NavigationLink(destination: SectionView()) {
+//
+//                                if groceryListItem.groceryName != nil {
+//                                    Text(groceryListItem.groceryName!).font(.headline)
+//                                }
+//
+//                            }
+//                        }
+//                    }
+//                    .onDelete(perform: { indexSet in
+//                        guard let index = indexSet.first else {
+//                            return
+//                        }
+//                        let itemToDelete = groceries[index]
+//                        context.delete(itemToDelete)
+//
+//                        do {
+//                            try context.save()
+//                        } catch {
+//                            print("Debug: .onDelete error is: ", error)
+//                        }
+//                    })
+//                }
+//            }
+//            .navigationTitle("Grocery List")
+//        }
+//    }
+//
+//    private func deleteCompany(offsets: IndexSet) {
+//        withAnimation {
+//            offsets.map { groceries[$0]
+//                }.forEach(context.delete)
+////            PersistenceController.shared.saveContext()
+//        }
+//    }
+    
+    
+    
+    
+    
+    
+    
+    
     
 //    MARK: - Some Tutorial
     

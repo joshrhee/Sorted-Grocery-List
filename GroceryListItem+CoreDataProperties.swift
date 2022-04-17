@@ -16,24 +16,20 @@ extension GroceryListItem {
         return NSFetchRequest<GroceryListItem>(entityName: "GroceryListItem")
     }
 
-//    @NSManaged public var createdAt: Date?
     @NSManaged public var groceryName: String?
-//    @NSManaged public var sectionName: String?
-    @NSManaged public var timestamp: Date?
     @NSManaged public var sectionListItem: NSSet?
     
     public var unwrappedName: String {
-        groceryName ?? "Unkown name"
+        groceryName ?? "Unknown name"
     }
-    
-    public var sectionListArray: [SectionListItem] {
-        let sectionListSet = sectionListItem as? Set<SectionListItem> ?? []
+
+    public var sectionsArray: [SectionListItem] {
+        let sectionSet = sectionListItem as? Set<SectionListItem> ?? []
         
-        return sectionListSet.sorted {
+        return sectionSet.sorted {
             $0.unwrappedName < $1.unwrappedName
         }
     }
-
 }
 
 // MARK: Generated accessors for sectionListItem

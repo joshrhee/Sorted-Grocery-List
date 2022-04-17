@@ -8,66 +8,45 @@
 import SwiftUI
 
 struct SectionView: View {
-    @Environment(\.managedObjectContext) var context
-    
-    @FetchRequest(fetchRequest: SectionListItem.getAllToDoListItems())
-    var sections: FetchedResults<SectionListItem>
-    
-    @State var sectionName: String = ""
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @StateObject var grocery: GroceryListItem
+    @State private var sectionName: String = ""
     
     var body: some View {
-        NavigationView {
+        VStack {
+            HStack {
+                TextField("Section name", text: $sectionName)
+                    .textFieldStyle(.roundedBorder)
+                Button(action: addSection) {
+                    Label("", systemImage: "plus")
+                }
+            }.padding()
+            
             List {
-                
-                // Mark: - Section name input textfield
-                
-                Section(header: Text("Section Name...")) {
-                    HStack {
-                        TextField("Enter section name...", text: $sectionName)
-                        
-                        Button(action: {
-                            if !sectionName.isEmpty {
-                                let newItem = SectionListItem(context: context)
-                                newItem.sectionName = sectionName
-                            }
-                            
-                            do {
-                                try context.save()
-                            } catch {
-                                print("Debug: SectionView button action error: ", error)
-                            }
-                            
-                            sectionName = ""
-                        }, label: {
-                            Text("Save")
-                        })
-                    }
-                }
-                
-                // Mark: - section name list
-                
-                Section {
-                    ForEach(sections) { sectionListItem in
-                        VStack(alignment: .leading) {
-                            if sectionListItem.sectionName != nil {
-                                Text(sectionListItem.sectionName!).font(.headline)
-                            }
-                        }
-                    }.onDelete(perform: { indexSet in
-                        guard let index = indexSet.first else {
-                            return
-                        }
-                        let itemToDelete = sections[index]
-
-                        context.delete(itemToDelete)
-                        
-                        do {
-                            try context.save()
-                        } catch {
-                            print("Debug: sections.onDelete error is: ", error)
-                        }
-                    })
-                }
+                ForEach(grocery.sectionsArray) { section in
+                    Text(section.unwrappedName)
+                }.onDelete(perform: deleteSection)
+            }
+        }.navigationTitle("Sections")
+    }
+    
+    private func addSection() {
+        withAnimation {
+            let newSection = SectionListItem(context: viewContext)
+            newSection.sectionName = sectionName
+            
+            grocery.addToSectionListItem(newSection)
+            PersistenceController.shared.saveContext()
+        }
+    }
+    
+    private func deleteSection(at offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                let section = grocery.sectionsArray[index]
+                viewContext.delete(section)
+                PersistenceController.shared.saveContext()
             }
         }
     }
@@ -75,6 +54,22 @@ struct SectionView: View {
 
 struct SectionView_Previews: PreviewProvider {
     static var previews: some View {
-        SectionView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        let viewContext = PersistenceController.preview.container.viewContext
+        let newGrocery = GroceryListItem(context: viewContext)
+        newGrocery.groceryName = "Kroger"
+        
+        let section1 = SectionListItem(context: viewContext)
+        section1.sectionName = "Fruit"
+        
+        let section2 = SectionListItem(context: viewContext)
+        section2.sectionName = "Meat"
+        
+        newGrocery.addToSectionListItem(section1)
+        newGrocery.addToSectionListItem(section2)
+        
+        
+        return SectionView(grocery: newGrocery)
+            .environment(\.managedObjectContext,
+                          PersistenceController.preview.container.viewContext)
     }
 }
