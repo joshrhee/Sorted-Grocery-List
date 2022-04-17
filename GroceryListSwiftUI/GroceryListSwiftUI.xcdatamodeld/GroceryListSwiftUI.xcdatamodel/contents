@@ -5,12 +5,14 @@
         <attribute name="groceryName" optional="YES" attributeType="String"/>
         <attribute name="sectionName" optional="YES" attributeType="String"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="sectionListItem" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SectionListItem" inverseName="groceryListItem" inverseEntity="SectionListItem"/>
     </entity>
     <entity name="SectionListItem" representedClassName=".SectionListItem" syncable="YES">
         <attribute name="sectionName" optional="YES" attributeType="String"/>
+        <relationship name="groceryListItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GroceryListItem" inverseName="sectionListItem" inverseEntity="GroceryListItem"/>
     </entity>
     <elements>
-        <element name="GroceryListItem" positionX="-63" positionY="-18" width="128" height="74"/>
-        <element name="SectionListItem" positionX="-63" positionY="9" width="128" height="44"/>
+        <element name="GroceryListItem" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="SectionListItem" positionX="-63" positionY="9" width="128" height="59"/>
     </elements>
 </model>

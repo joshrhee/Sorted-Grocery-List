@@ -10,12 +10,16 @@ import CoreData
 
 struct ContentView: View {
     
-    @Environment(\.managedObjectContext) var context
+    @Environment(\.managedObjectContext) private var context
+    
+    @State var groceryName: String = ""
     
     @FetchRequest(fetchRequest: GroceryListItem.getAllGroceryNames())
-    var items: FetchedResults<GroceryListItem>
+//    @FetchRequest(
+//            sortDescriptors: [NSSortDescriptor(keyPath: \GroceryListItem.groceryName, ascending: true)],
+//            animation: .default)
+    private var groceries: FetchedResults<GroceryListItem>
     
-    @State var text: String = ""
     
     var body: some View {
         NavigationView {
@@ -25,13 +29,13 @@ struct ContentView: View {
                 
                 Section(header: Text("Grocery Name")) {
                     HStack {
-                        TextField("Enter grocery name...", text: $text)
+                        TextField("Enter grocery name...", text: $groceryName)
                         
                         Button(action: {
                             
-                            if !text.isEmpty {
+                            if !groceryName.isEmpty {
                                 let newItem = GroceryListItem(context: context)
-                                newItem.groceryName = text
+                                newItem.groceryName = groceryName
                                 newItem.createdAt = Date()
                                 
                                 do {
@@ -41,7 +45,7 @@ struct ContentView: View {
                                 }
                                 
                                 // Reseting to empty textfield when save button is clicked
-                                text = ""
+                                groceryName = ""
                                 
                             }
                             
@@ -55,7 +59,7 @@ struct ContentView: View {
                 // MARK: - Grocery name list
                 
                 Section {
-                    ForEach(items) { groceryListItem in
+                    ForEach(groceries) { groceryListItem in
                         VStack(alignment: .leading) {
                             NavigationLink(destination: SectionView()) {
                                 
@@ -70,7 +74,7 @@ struct ContentView: View {
                         guard let index = indexSet.first else {
                             return
                         }
-                        let itemToDelete = items[index]
+                        let itemToDelete = groceries[index]
                         context.delete(itemToDelete)
                         
                         do {
@@ -82,6 +86,14 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Grocery List")
+        }
+    }
+    
+    private func deleteCompany(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { groceries[$0]
+                }.forEach(context.delete)
+//            PersistenceController.shared.saveContext()
         }
     }
     
