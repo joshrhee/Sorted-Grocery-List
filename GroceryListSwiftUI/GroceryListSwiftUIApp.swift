@@ -17,8 +17,16 @@ struct GroceryListSwiftUIApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-        }.onChange(of: scenePhase) { _ in
+        }.onChange(of: scenePhase) { currentPhase in
             persistenceController.saveContext()
+            
+            if currentPhase == .active {
+                print("App is Active!")
+            } else if currentPhase == .inactive {
+                print("App is In-Active!")
+            } else if currentPhase == .background {
+                print("App is in the Background!")
+            }
         }
     }
 }
